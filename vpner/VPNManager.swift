@@ -87,7 +87,7 @@ class VPNManager: ObservableObject {
         statusTimer = nil
     }
     
-    private func checkConnectionStatus() {
+    public func checkConnectionStatus() {
         guard let service = selectedService else { return }
         
         let task = Process()

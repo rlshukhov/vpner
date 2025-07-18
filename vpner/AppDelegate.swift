@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setupMenu() {
         statusMenu = NSMenu()
+        statusMenu.delegate = self
         
         let selectedItem = NSMenuItem(title: "Selected: None", action: nil, keyEquivalent: "")
         let submenu = NSMenu()
@@ -107,6 +108,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillTerminate(_ notification: Notification) {
         vpnManager.stopMonitoring()
+    }
+}
+
+// MARK: - NSMenuDelegate
+extension AppDelegate: NSMenuDelegate {
+    func menuWillOpen(_ menu: NSMenu) {
+        vpnManager.checkConnectionStatus()
     }
 }
 
